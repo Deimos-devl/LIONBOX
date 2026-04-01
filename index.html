@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lion Box | CrossFit</title>
+  <meta name="description" content="Landing page da Lion Box para agendamento de aula experimental de CrossFit." />
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-soft: #0e0e0e;
+      --card: rgba(255,255,255,0.04);
+      --card-strong: rgba(255,255,255,0.06);
+      --line: rgba(255, 209, 59, 0.14);
+      --line-strong: rgba(255, 209, 59, 0.28);
+      --text: #f6f6f6;
+      --muted: #b9b9b9;
+      --yellow: #ffd13b;
+      --yellow-2: #ffb400;
+      --shadow: 0 24px 70px rgba(0,0,0,.42);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 209, 59, 0.09), transparent 24%),
+        radial-gradient(circle at 85% 20%, rgba(255, 180, 0, 0.05), transparent 16%),
+        linear-gradient(180deg, #040404 0%, #090909 42%, #040404 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: radial-gradient(circle at center, black 34%, transparent 88%);
+      opacity: .1;
+    }
+
+    .wrap {
+      width: min(calc(100% - 28px), var(--max));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 5, 5, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .topbar-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 209, 59, .24), rgba(255, 180, 0, .08));
+      border: 1px solid rgba(255, 209, 59, 0.22);
+      box-shadow: 0 0 24px rgba(255, 209, 59, 0.12);
+      flex: 0 0 auto;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: .96rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .brand span {
+      display: block;
+      font-size: .84rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: .25s ease;
+      font-size: .93rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.04);
+    }
+
+    .nav-links .cta-top {
+      background: linear-gradient(135deg, var(--yellow), var(--yellow-2));
+      color: #111;
+      font-weight: 800;
+      box-shadow: 0 14px 28px rgba(255, 193, 7, .16);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 76px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.54) 48%, #050505 100%),
+        url('lion-hero-bg.jpg') center/cover no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 34%, rgba(255, 209, 59, .18), transparent 42%);
+      filter: blur(70px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 34%;
+      background: linear-gradient(180deg, transparent, #050505 88%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 26px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      animation: fadeUp 1.1s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 209, 59, 0.18);
+      background: rgba(255,255,255,0.03);
+      color: var(--yellow);
+      font-size: .86rem;
+      margin-bottom: 18px;
+      letter-spacing: .04em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.9rem, 6vw, 5.4rem);
+      line-height: .94;
+      letter-spacing: -2.5px;
+      text-transform: uppercase;
+    }
+
+    h1 span {
+      color: var(--yellow);
+      text-shadow: 0 0 40px rgba(255, 209, 59, 0.22);
+    }
+
+    .hero-copy p {
+      margin: 18px 0 0;
+      font-size: 1.04rem;
+      line-height: 1.82;
+      color: #dbdbdb;
+      max-width: 58ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn, .btn-ghost {
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 800;
+      transition: .24s ease;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--yellow), var(--yellow-2));
+      color: #111;
+      box-shadow: 0 18px 40px rgba(255, 193, 7, 0.20);
+    }
+
+    .btn:hover, .btn-ghost:hover { transform: translateY(-3px); }
+
+    .btn-ghost {
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-stats {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 760px;
+    }
+
+    .stat {
+      padding: 16px 17px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.55;
+    }
+
+    .hero-visual {
+      display: grid;
+      place-items: center;
+      min-height: 600px;
+      position: relative;
+    }
+
+    .halo, .halo.two {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 209, 59, 0.18);
+      box-shadow: 0 0 60px rgba(255, 209, 59, 0.06);
+      animation: spin 18s linear infinite;
+    }
+
+    .halo {
+      width: min(78vw, 420px);
+      aspect-ratio: 1;
+    }
+
+    .halo.two {
+      width: min(90vw, 520px);
+      aspect-ratio: 1;
+      opacity: .55;
+      animation-direction: reverse;
+      animation-duration: 28s;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .coach-frame {
+      width: min(90%, 430px);
+      height: 560px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 209, 59, .16);
+      background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.98));
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .coach-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 209, 59, .06), transparent 32%),
+        linear-gradient(180deg, transparent, rgba(0,0,0,.34));
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .coach-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .coach-note {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 3;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(5,5,5,.58);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #e7e7e7;
+      font-size: .92rem;
+      line-height: 1.6;
+    }
+
+    section.standard {
+      padding: 108px 0;
+    }
+
+    .section-head {
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.02;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 74ch;
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 1rem;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .card {
+      background: rgba(255,255,255,.025);
+      border: 1px solid var(--line);
+      padding: 30px;
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(14px);
+      transition: .32s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255, 209, 59, .34);
+      box-shadow: 0 22px 60px rgba(255, 193, 7, .08);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 1.34rem;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.82;
+      font-size: .98rem;
+    }
+
+    .list {
+      margin: 16px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .highlight {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    .process-step {
+      display: inline-flex;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 209, 59, .12);
+      color: var(--yellow);
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .schedule-card {
+      background: linear-gradient(180deg, rgba(255, 209, 59, .06), rgba(255,255,255,.02));
+    }
+
+    .time-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .time-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #fff;
+      font-size: .92rem;
+    }
+
+    .contact-box {
+      background: linear-gradient(180deg, rgba(255, 209, 59, .05), rgba(255,255,255,.02));
+      border: 1px solid rgba(255, 209, 59, 0.14);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .form-full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-size: .94rem;
+      color: #fff;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(255, 209, 59, .34);
+      box-shadow: 0 0 0 4px rgba(255, 209, 59, .08);
+    }
+
+    .whatsapp-note {
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 1.76;
+      font-size: .96rem;
+    }
+
+    .whatsapp-note strong {
+      color: var(--text);
+    }
+
+    .footer {
+      padding: 22px 0 40px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: .92rem;
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid, .grid-2, .grid-3, .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        min-height: auto;
+        padding: 14px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 2px;
+      }
+
+      .hero {
+        padding-top: 108px;
+      }
+
+      .hero-visual {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero, section.standard {
+        min-height: auto;
+      }
+
+      h1 {
+        font-size: 2.45rem;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .coach-frame {
+        width: min(100%, 360px);
+        height: 460px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="lion-logo.png" alt="Logo Lion Box" />
+        </div>
+        <div>
+          <strong>Lion Box</strong>
+          <span>CrossFit • força • disciplina • evolução</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#porque">Por que crossfit</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#aulas">Horários</a>
+        <a href="#coach">Coach</a>
+        <a href="#contato" class="cta-top">Agende sua aula</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Aula experimental • atmosfera forte • estrutura adaptável</div>
+        <h1><span>Crossfit</span><br>para todos.</h1>
+        <p>
+          Com a orientação de um profissional devidamente qualificado e credenciado,
+          adaptando movimentos e pesos segundo suas limitações, a resposta é sim:
+          <span class="highlight">Crossfit é para todos.</span>
+          Agora deixa esse medo ou preconceito de lado e marque já sua aula experimental 👊
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contato" class="btn">Agende sua aula</a>
+          <a href="#porque" class="btn-ghost">Entender melhor</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>Acompanhamento real</strong>
+            <span>Treino orientado, correção de movimentos e adaptação conforme sua limitação.</span>
+          </div>
+          <div class="stat">
+            <strong>Ambiente forte</strong>
+            <span>Visual marcante, galpão com identidade própria e energia de comunidade.</span>
+          </div>
+          <div class="stat">
+            <strong>Primeiro passo</strong>
+            <span>A aula experimental é o jeito certo de sentir a metodologia e vencer o bloqueio inicial.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="halo"></div>
+        <div class="halo two"></div>
+        <div class="coach-frame">
+          <img src="coach-dennis.png" alt="Coach Dennis Camillo" />
+          <div class="coach-note">
+            Coach e SEO da LionBox Dennis Camillo.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="porque" class="standard wrap reveal">
+    <div class="section-head">
+      <h2>Por que o crossfit pode ser para você</h2>
+      <p>
+        Muita gente olha de fora e pensa que CrossFit é só para atletas ou para quem já está condicionado.
+        Na prática, não é assim. O que define o treino é a forma como ele é conduzido, adaptado e acompanhado.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      <article class="card">
+        <h3>Treino adaptável</h3>
+        <p>
+          Movimentos, cargas e intensidade podem ser ajustados conforme o seu nível atual.
+          Isso permite que iniciantes, pessoas sedentárias e quem já treina encontrem sua própria progressão.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Mais que estética</h3>
+        <p>
+          O foco não é só aparência. O treino desenvolve força, condicionamento, mobilidade, resistência e confiança física no dia a dia.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>Comunidade e disciplina</h3>
+        <p>
+          O ambiente do box ajuda a manter constância, energia e compromisso. Você não treina solto: treina com direção, presença e incentivo.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="como-funciona" class="standard wrap reveal">
+    <div class="section-head">
+      <h2>Como funciona na Lion Box</h2>
+      <p>
+        A proposta é simples: entender seu ponto de partida, ajustar o treino ao seu contexto e te colocar em movimento com acompanhamento de verdade.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      <article class="card">
+        <div class="process-step">1</div>
+        <h3>Você chega sem pressão</h3>
+        <p>
+          Não importa se você nunca treinou, se está voltando agora ou se já tem experiência. O primeiro contato é para te situar e te deixar confortável.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="process-step">2</div>
+        <h3>O treino é ajustado</h3>
+        <p>
+          Dennis Camillo orienta os movimentos e adapta pesos e execuções segundo suas limitações, respeitando sua realidade e sua evolução.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="process-step">3</div>
+        <h3>Você evolui com método</h3>
+        <p>
+          O objetivo não é te jogar em um treino aleatório, mas construir constância, técnica, segurança e progresso dentro da metodologia da Lion Box.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="aulas" class="standard wrap reveal">
+    <div class="section-head">
+      <h2>Horários para aula experimental</h2>
+      <p>
+        Você pode direcionar o agendamento para um dos períodos abaixo. Depois ajustamos juntos os detalhes finais do atendimento.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <article class="card schedule-card">
+        <h3>Turno da manhã</h3>
+        <p>
+          Para quem quer começar o dia com intensidade, foco e energia.
+        </p>
+        <div class="time-pills">
+          <span class="time-pill">07h às 08h</span>
+        </div>
+      </article>
+
+      <article class="card schedule-card">
+        <h3>Turno da tarde</h3>
+        <p>
+          Opções para encaixar o treino na rotina com praticidade.
+        </p>
+        <div class="time-pills">
+          <span class="time-pill">12h às 13h</span>
+          <span class="time-pill">13h às 14h</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="coach" class="standard wrap reveal">
+    <div class="section-head">
+      <h2>Coach Dennis Camillo</h2>
+      <p>
+        A proposta da Lion Box é unir intensidade com direção. O treino forte só faz sentido quando existe orientação, adaptação e acompanhamento profissional.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <article class="card">
+        <h3>Presença e liderança</h3>
+        <p>
+          O coach conduz o treino com foco técnico, leitura do aluno e adaptação dos estímulos para cada realidade. Isso faz diferença para quem está começando e também para quem quer evoluir com mais seriedade.
+        </p>
+        <ul class="list">
+          <li>Correção de movimento</li>
+          <li>Adaptação de peso e intensidade</li>
+          <li>Acompanhamento mais consciente</li>
+          <li>Ambiente mais seguro para começar</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>Identidade da Lion Box</h3>
+        <p>
+          Preto, amarelo e branco, um leão como símbolo e um box com personalidade marcante: a Lion Box passa força, atitude e comunidade. O visual do site foi criado para seguir essa direção e valorizar a marca.
+        </p>
+        <ul class="list">
+          <li>Logo com leão e arranhões</li>
+          <li>Estética forte e urbana</li>
+          <li>Clima de galpão / box real</li>
+          <li>Página pronta para atrair novos alunos</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="contato" class="standard wrap reveal">
+    <div class="section-head">
+      <h2>Agende sua aula experimental</h2>
+      <p>
+        Preencha abaixo e envie. O objetivo é facilitar o primeiro contato pelo WhatsApp já com seu nome, Instagram e turno desejado.
+      </p>
+    </div>
+
+    <div class="card contact-box">
+      <div class="grid-2">
+        <div>
+          <h3>Primeiro passo sem enrolação</h3>
+          <p>
+            Você envia as informações, escolhe o turno preferido e segue para o WhatsApp. A partir daí, a conversa continua de forma direta para confirmar a melhor aula experimental para você.
+          </p>
+          <ul class="list">
+            <li>Ideal para quem quer conhecer o box</li>
+            <li>Ótimo para quebrar o medo inicial</li>
+            <li>Contato direto e objetivo</li>
+          </ul>
+          <div class="whatsapp-note">
+            <strong>Observação:</strong> troque depois o número do WhatsApp no código pelo número oficial da Lion Box.
+          </div>
+        </div>
+
+        <div>
+          <form id="lionForm">
+            <div class="form-grid">
+              <div>
+                <label for="nome">Seu nome</label>
+                <input id="nome" type="text" placeholder="Ex.: João Silva" />
+              </div>
+
+              <div>
+                <label for="instagram">Seu Instagram</label>
+                <input id="instagram" type="text" placeholder="Ex.: @seuperfil" />
+              </div>
+
+              <div class="form-full">
+                <label for="objetivo">O que você busca?</label>
+                <select id="objetivo">
+                  <option>Começar do zero</option>
+                  <option>Melhorar condicionamento</option>
+                  <option>Ganhar força</option>
+                  <option>Voltar a treinar</option>
+                  <option>Conhecer o box</option>
+                </select>
+              </div>
+
+              <div class="form-full">
+                <label for="horario">Turno desejado</label>
+                <select id="horario">
+                  <option>07h às 08h</option>
+                  <option>12h às 13h</option>
+                  <option>13h às 14h</option>
+                </select>
+              </div>
+
+              <div class="form-full">
+                <label for="detalhes">Mensagem adicional</label>
+                <textarea id="detalhes" placeholder="Ex.: Nunca fiz CrossFit, mas quero fazer minha aula experimental."></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn" style="margin-top:18px; width:100%;">Agendar pelo WhatsApp</button>
+          </form>
+
+          <div class="whatsapp-note">
+            No envio, a mensagem já vai pronta com suas informações para facilitar o atendimento.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap footer">
+    Lion Box • CrossFit com identidade forte, orientação profissional e aula experimental via WhatsApp.
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const onReveal = () => {
+      reveals.forEach((el) => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 80) el.classList.add('active');
+      });
+    };
+    window.addEventListener('scroll', onReveal);
+    onReveal();
+
+    document.getElementById('lionForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value.trim() || 'Não informado';
+      const instagram = document.getElementById('instagram').value.trim() || 'Não informado';
+      const objetivo = document.getElementById('objetivo').value;
+      const horario = document.getElementById('horario').value;
+      const detalhes = document.getElementById('detalhes').value.trim() || 'Quero marcar minha aula experimental.';
+
+      const msg = [
+        'Olá, vim pela landing da Lion Box.',
+        '',
+        'Nome: ' + nome,
+        'Instagram: ' + instagram,
+        'Objetivo: ' + objetivo,
+        'Turno desejado: ' + horario,
+        'Mensagem: ' + detalhes,
+        '',
+        'Quero agendar minha aula experimental.'
+      ].join('\n');
+
+      window.open('https://wa.me/5500000000000?text=' + encodeURIComponent(msg), '_blank');
+    });
+
+    console.assert(['a', 'b'].join('\n') === 'a\nb', 'join com quebra de linha falhou');
+    console.assert(typeof document.getElementById('lionForm') !== 'undefined', 'formulário não encontrado');
+  </script>
+</body>
+</html>
