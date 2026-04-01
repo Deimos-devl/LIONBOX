@@ -69,11 +69,11 @@
     }
 
     .topbar-inner {
-      min-height: 76px;
+      min-height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 14px;
     }
 
     .brand {
@@ -84,8 +84,8 @@
     }
 
     .brand-logo {
-      width: 50px;
-      height: 50px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       overflow: hidden;
       background: linear-gradient(135deg, rgba(255, 209, 59, .24), rgba(255, 180, 0, .08));
@@ -117,17 +117,28 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      max-width: 100%;
+      padding-bottom: 2px;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
     }
 
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      padding: 10px 14px;
+      padding: 8px 12px;
       border-radius: 999px;
       transition: .25s ease;
-      font-size: .93rem;
+      font-size: .86rem;
+      white-space: nowrap;
+      flex: 0 0 auto;
     }
 
     .nav-links a:hover {
@@ -148,7 +159,7 @@
       align-items: center;
       position: relative;
       overflow: hidden;
-      padding-top: 76px;
+      padding-top: 68px;
       background:
         linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.54) 48%, #050505 100%),
         url('lion-hero-bg.jpg') center/cover no-repeat;
@@ -158,16 +169,21 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 34%, rgba(255, 209, 59, .18), transparent 42%);
-      filter: blur(70px);
+      background:
+        radial-gradient(circle at 50% 34%, rgba(255, 209, 59, .16), transparent 38%),
+        linear-gradient(180deg, rgba(255,255,255,.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+      background-size: auto, 58px 58px, 58px 58px;
+      filter: blur(24px);
+      opacity: .9;
     }
 
     .hero::after {
       content: "";
       position: absolute;
       inset: auto 0 0 0;
-      height: 34%;
-      background: linear-gradient(180deg, transparent, #050505 88%);
+      height: 42%;
+      background: linear-gradient(180deg, transparent 0%, rgba(5,5,5,.55) 54%, #050505 100%);
       pointer-events: none;
     }
 
@@ -184,6 +200,7 @@
     .hero-copy {
       max-width: 650px;
       animation: fadeUp 1.1s ease;
+      padding: 12px 0;
     }
 
     @keyframes fadeUp {
@@ -260,7 +277,7 @@
     }
 
     .hero-stats {
-      margin-top: 32px;
+      margin-top: 28px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
@@ -270,9 +287,20 @@
     .stat {
       padding: 16px 17px;
       border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
       backdrop-filter: blur(8px);
+      transition: .28s ease, box-shadow .28s ease, border-color .28s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .stat:hover,
+    .stat:active,
+    .stat:focus-within,
+    .stat.touch-glow {
+      transform: translateY(-4px);
+      border-color: rgba(255, 209, 59, .34);
+      box-shadow: 0 18px 46px rgba(255, 193, 7, .12), 0 0 0 1px rgba(255, 209, 59, .06) inset;
     }
 
     .stat strong {
@@ -292,8 +320,9 @@
     .hero-visual {
       display: grid;
       place-items: center;
-      min-height: 600px;
+      min-height: 560px;
       position: relative;
+      padding: 10px 0;
     }
 
     .halo, .halo.two {
@@ -320,8 +349,8 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .coach-frame {
-      width: min(90%, 430px);
-      height: 560px;
+      width: min(100%, 420px);
+      aspect-ratio: 4 / 5.1;
       border-radius: 30px;
       overflow: hidden;
       border: 1px solid rgba(255, 209, 59, .16);
@@ -401,13 +430,17 @@
       padding: 30px;
       border-radius: var(--radius-xl);
       backdrop-filter: blur(14px);
-      transition: .32s ease;
+      transition: .32s ease, box-shadow .32s ease, border-color .32s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .card:hover {
+    .card:hover,
+    .card:active,
+    .card:focus-within,
+    .card.touch-glow {
       transform: translateY(-7px);
       border-color: rgba(255, 209, 59, .34);
-      box-shadow: 0 22px 60px rgba(255, 193, 7, .08);
+      box-shadow: 0 22px 60px rgba(255, 193, 7, .12), 0 0 0 1px rgba(255, 209, 59, .04) inset;
     }
 
     .card h3 {
@@ -546,25 +579,38 @@
       }
 
       .topbar-inner {
-        min-height: auto;
-        padding: 14px 0;
-        flex-direction: column;
-        align-items: flex-start;
+        min-height: 62px;
+        padding: 10px 0;
+        gap: 10px;
+      }
+
+      .brand strong {
+        font-size: .88rem;
+      }
+
+      .brand span {
+        font-size: .76rem;
       }
 
       .nav-links {
         width: 100%;
-        overflow: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 2px;
+        gap: 6px;
       }
 
       .hero {
-        padding-top: 108px;
+        padding-top: 92px;
       }
 
       .hero-visual {
-        min-height: 420px;
+        min-height: 360px;
+      }
+
+      .halo {
+        width: min(78vw, 300px);
+      }
+
+      .halo.two {
+        width: min(88vw, 380px);
       }
     }
 
@@ -574,11 +620,26 @@
       }
 
       h1 {
-        font-size: 2.45rem;
+        font-size: 2rem;
+        letter-spacing: -1.4px;
+        line-height: .98;
+      }
+
+      .section-head h2 {
+        font-size: 1.7rem;
+        line-height: 1.08;
       }
 
       .card {
-        padding: 24px;
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .hero-copy p,
+      .section-head p,
+      .card p {
+        font-size: .95rem;
+        line-height: 1.72;
       }
 
       .hero-stats {
@@ -586,8 +647,27 @@
       }
 
       .coach-frame {
-        width: min(100%, 360px);
-        height: 460px;
+        width: min(100%, 320px);
+        aspect-ratio: 4 / 5;
+      }
+
+      .coach-note {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        padding: 12px 13px;
+        font-size: .86rem;
+      }
+
+      .hero-actions,
+      .hero-actions .btn,
+      .hero-actions .btn-ghost {
+        width: 100%;
+      }
+
+      .nav-links a {
+        font-size: .82rem;
+        padding: 8px 11px;
       }
     }
   </style>
@@ -654,7 +734,7 @@
         <div class="coach-frame">
           <img src="coach-dennis.png" alt="Coach Dennis Camillo" />
           <div class="coach-note">
-            Coach e SEO da LionBox Dennis Camillo.
+            Coach e SEO da LionBox, Dennis Camillo.
           </div>
         </div>
       </div>
@@ -914,6 +994,20 @@
 
     console.assert(['a', 'b'].join('\n') === 'a\nb', 'join com quebra de linha falhou');
     console.assert(typeof document.getElementById('lionForm') !== 'undefined', 'formulário não encontrado');
+  
+    const touchTargets = document.querySelectorAll('.card, .stat');
+    touchTargets.forEach((el) => {
+      el.addEventListener('touchstart', () => {
+        touchTargets.forEach((item) => item !== el && item.classList.remove('touch-glow'));
+        el.classList.add('touch-glow');
+      }, { passive: true });
+    });
+
+    document.addEventListener('touchstart', (e) => {
+      if (!e.target.closest('.card, .stat')) {
+        touchTargets.forEach((item) => item.classList.remove('touch-glow'));
+      }
+    }, { passive: true });
   </script>
 </body>
 </html>
